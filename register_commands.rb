@@ -7,4 +7,8 @@ class RegisterCommands
     cmd.string('message', 'Message to spongecase')
     cmd.boolean('with_picture', 'Show the mocking sponge?')
   end
+
+  bot.register_application_command(:hourly, 'Get the forecast every 3 hours', server_id: ENV['SERVER_ID']) do |cmd|
+    cmd.string('location', 'The location to get the weather for', required: true)
+  end
 end
