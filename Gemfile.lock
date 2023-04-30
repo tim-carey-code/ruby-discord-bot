@@ -26,6 +26,7 @@ GEM
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
+    json (2.6.3)
     mime-types (3.4.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2023.0218.1)
@@ -55,6 +56,7 @@ DEPENDENCIES
   discordrb!
   dotenv (~> 2.8, >= 2.8.1)
   httparty (~> 0.21.0)
+  json
 
 BUNDLED WITH
    2.4.1
