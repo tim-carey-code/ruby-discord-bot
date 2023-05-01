@@ -80,7 +80,7 @@ bot.application_command(:translate) do |event|
   response = http.request(request)
   json_object = JSON.parse(response.read_body)
 
-  event.respond(content: json_object['data']['translations'][0]['translatedText'])
+  event.respond(content: "query: #{query}", embeds: [{ description: "#{target} translation: " + json_object['data']['translations'][0]['translatedText']}])
 end
 
 bot.run
