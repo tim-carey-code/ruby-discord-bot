@@ -2,11 +2,11 @@
 
 require 'dotenv/load'
 require 'discordrb'
-require_relative 'register_commands'
+require_relative 'commands/register_commands'
 require_relative 'mentions'
-require_relative 'spongecase_command'
-require_relative 'weather_commands'
-require_relative 'translate_command'
+require_relative 'commands/spongecase_command'
+require_relative 'commands/weather_commands'
+require_relative 'commands/translate_command'
 
 api_key = ENV["WEATHER_API_KEY"]
 
