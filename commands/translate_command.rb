@@ -13,7 +13,7 @@ class TranslateCommand
                                headers: {
                                  'Content-Type': 'application/x-www-form-urlencoded',
                                  'Accept-Encoding': 'application/gzip',
-                                 'X-RapidAPI-Key': '903dc4b2a8msh910de95fc0d7d45p19b4bfjsn919a88f72f80',
+                                 'X-RapidAPI-Key': ENV['RAPID_API_KEY',],
                                  'X-RapidAPI-Host': 'google-translate1.p.rapidapi.com'
                                }
       )
