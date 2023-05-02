@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
+Bundler.require
 require 'dotenv/load'
-require 'discordrb'
 require_relative 'commands/register_commands'
 require_relative 'mentions'
 require_relative 'commands/spongecase_command'

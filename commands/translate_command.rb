@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
-
 class TranslateCommand
   def initialize(bot)
     bot.application_command(:translate) do |event|

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'httparty'
-
 class WeatherCommands
   def initialize(bot, api_key)
     @bot = bot
