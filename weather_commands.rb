@@ -14,11 +14,9 @@ class WeatherCommands
 
   def current_weather
     @bot.application_command(:weather) do |event|
-      location = event.options['location'].capitalize
+      location = get_location(event)
       url = "https://api.openweathermap.org/data/2.5/weather?q=#{location},us&units=imperial&appid=#{@api_key}"
-      response = HTTParty.get(url, format: :plain)
-
-      json_response = JSON.parse(response, symbolize_names: true)
+      json_response = get_json_response(url)
 
       country = json_response[:sys][:country]
 
@@ -30,11 +28,9 @@ class WeatherCommands
 
   def hourly_weather
     @bot.application_command(:hourly) do |event|
-      location = event.options['location'].capitalize
+      location = get_location(event)
       url = "https://api.openweathermap.org/data/2.5/forecast?q=#{location},us&units=imperial&appid=#{@api_key}"
-      response = HTTParty.get(url, format: :plain)
-
-      json_response = JSON.parse(response, symbolize_names: true)
+      json_response = get_json_response(url)
 
       country = json_response[:city][:country]
 
@@ -46,5 +42,14 @@ class WeatherCommands
 
       event.respond(content: "The hourly forecast for #{location}, #{country} is: #{hourly_forecast.join(' ')}")
     end
+  end
+
+  def get_json_response(url)
+    response = HTTParty.get(url, format: :plain)
+    JSON.parse(response, symbolize_names: true)
+  end
+
+  def get_location(event)
+    event.options['location'].capitalize
   end
 end
