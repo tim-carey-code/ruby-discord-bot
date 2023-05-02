@@ -1,0 +1,16 @@
+current directory: /home/runner/ruby-discord-bot/.bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+/nix/store/zy37gk8w7qvzxcpvl74d2zh1zvfsixj0-ruby-3.1.2/bin/ruby -I /nix/store/zy37gk8w7qvzxcpvl74d2zh1zvfsixj0-ruby-3.1.2/lib/ruby/3.1.0 extconf.rb
+checking for -lstdc++... yes
+creating Makefile
+
+current directory: /home/runner/ruby-discord-bot/.bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230502-1218-d5gxro sitelibdir\=./.gem.20230502-1218-d5gxro clean
+
+current directory: /home/runner/ruby-discord-bot/.bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230502-1218-d5gxro sitelibdir\=./.gem.20230502-1218-d5gxro
+compiling unf.cc
+linking shared-object unf_ext.so
+
+current directory: /home/runner/ruby-discord-bot/.bundle/ruby/3.1.0/gems/unf_ext-0.0.8.2/ext/unf_ext
+make DESTDIR\= sitearchdir\=./.gem.20230502-1218-d5gxro sitelibdir\=./.gem.20230502-1218-d5gxro install
+install -c -p -m 755 unf_ext.so ./.gem.20230502-1218-d5gxro
