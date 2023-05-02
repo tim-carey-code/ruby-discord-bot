@@ -2,11 +2,10 @@
 
 require 'dotenv/load'
 require 'discordrb'
-require 'httparty'
-require 'uri'
-require 'net/http'
-require 'json'
 require_relative 'mentions'
+require_relative 'spongecase_command'
+require_relative 'weather_commands'
+require_relative 'translate_command'
 
 api_key = ENV["WEATHER_API_KEY"]
 
@@ -14,73 +13,9 @@ bot = Discordrb::Bot.new token: ENV['DISCORD_TOKEN'], intents: [:servers, :serve
 
 bot.server(ENV['SERVER_ID'])
 
-mentions = Mentions.new
-mentions.mention_pm_user(bot)
-
-
-
-bot.application_command(:spongecase) do |event|
-  ops = %i[upcase downcase]
-  text = event.options['message'].chars.map { |x| x.__send__(ops.sample) }.join
-  event.respond(content: text)
-
-  event.send_message(content: 'https://pyxis.nymag.com/v1/imgs/09c/923/65324bb3906b6865f904a72f8f8a908541-16-spongebob-explainer.rsquare.w700.jpg') if event.options['with_picture']
-end
-
-bot.application_command(:weather) do |event|
-  location = event.options['location'].capitalize
-  url = "https://api.openweathermap.org/data/2.5/weather?q=#{location},us&units=imperial&appid=#{api_key}"
-  response = HTTParty.get(url, format: :plain)
-
-  json_response = JSON.parse(response, symbolize_names: true)
-
-  country = json_response[:sys][:country]
-
-  rounded_temp = json_response[:main][:temp].floor
-
-  event.respond(content: "The current weather in #{location}, #{country} is #{rounded_temp}°F with #{json_response[:weather][0][:description]}. Wind speed of #{json_response[:wind][:speed]} MPH. Humidity is #{json_response[:main][:humidity]}%.")
-end
-
-
-bot.application_command(:hourly) do |event|
-  location = event.options['location'].capitalize
-  url = "https://api.openweathermap.org/data/2.5/forecast?q=#{location},us&units=imperial&appid=#{api_key}"
-  response = HTTParty.get(url, format: :plain)
-
-  json_response = JSON.parse(response, symbolize_names: true)
-
-  country = json_response[:city][:country]
-
-  hourly_forecast = json_response[:list].map do |forecast|
-    rounded_temp = forecast[:main][:temp].floor
-    time = Time.at(forecast[:dt]).strftime('%I:%M %p')
-    "At #{time}, it will be #{rounded_temp}°F with #{forecast[:weather][0][:description]}.\n"
-  end
-
-  event.respond(content: "The hourly forecast for #{location}, #{country} is: #{hourly_forecast.join(' ')}")
-end
-
-
-bot.application_command(:translate) do |event|
-  query = event.options['query']
-  target = event.options['target']
-
-  url = URI("https://google-translate1.p.rapidapi.com/language/translate/v2")
-
-  http = Net::HTTP.new(url.host, url.port)
-  http.use_ssl = true
-
-  request = Net::HTTP::Post.new(url)
-  request["content-type"] = 'application/x-www-form-urlencoded'
-  request["Accept-Encoding"] = 'application/gzip'
-  request["X-RapidAPI-Key"] = '903dc4b2a8msh910de95fc0d7d45p19b4bfjsn919a88f72f80'
-  request["X-RapidAPI-Host"] = 'google-translate1.p.rapidapi.com'
-  request.body = "source=en&target=#{target}&q=#{query}"
-
-  response = http.request(request)
-  json_object = JSON.parse(response.read_body)
-
-  event.respond(content: "query: #{query}", embeds: [{ description: "#{target} translation: " + json_object['data']['translations'][0]['translatedText']}])
-end
+Mentions.new(bot)
+SpongecaseCommand.new(bot)
+WeatherCommands.new(bot, api_key)
+TranslateCommand.new(bot)
 
 bot.run
