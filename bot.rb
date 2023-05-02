@@ -2,6 +2,7 @@
 
 require 'dotenv/load'
 require 'discordrb'
+require_relative 'register_commands'
 require_relative 'mentions'
 require_relative 'spongecase_command'
 require_relative 'weather_commands'
@@ -17,5 +18,9 @@ Mentions.new(bot)
 SpongecaseCommand.new(bot)
 WeatherCommands.new(bot, api_key)
 TranslateCommand.new(bot)
+
+if ENV['REGISTER_COMMANDS'] == 'true'
+  RegisterCommands.register_all(bot)
+end
 
 bot.run
