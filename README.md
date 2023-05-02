@@ -1,13 +1,13 @@
 # Discord bot written in Ruby 💎♦️❤️
 
 ### What does this bot do?
-- This bot uses slash commands to interact with discord users
-- This bot can send weather information of a city to a discord channel(current weather, and a 5 day 3 hour forecast)
+- This bot uses slash commands to interact with discord users🚀🔥
+- This bot can send weather☀️ information of a city🌆 to a discord channel(current weather, and a 5 day 3 hour forecast)
 - This bot can translate english text to any language and send it to a discord channel
 - This bot can send a spongebob mocking meme with upcase/downcase text to a discord channel
 - Set up to be able to register new commands easily
 
-### How to use this bot
+### How to use this bot📖
 
 1. Clone this repository
 2. cd into the directory
